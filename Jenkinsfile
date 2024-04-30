@@ -14,6 +14,12 @@ pipeline {
                 sh 'mvn javadoc:aggregate-jar --fail-never'
             }
         }
+        stage('Test report') {
+            steps {
+                sh 'mvn test --fail-never'
+                sh 'mvn surefire-report:report'
+            }
+        }
         stage('pmd') {
             steps {
                 sh 'mvn pmd:pmd'
